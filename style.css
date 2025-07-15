@@ -1,0 +1,50 @@
+body {
+    max-width: none;
+    margin: 0;
+    background: #f8f8f8;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 18px;
+}
+h1 {
+    text-align: center;
+}
+.result {
+    font-size: 1.2em;
+    margin-top: 1.5em;
+    background: #fff;
+    border-radius: 8px;
+    padding: 1em;
+    box-shadow: 0 1px 4px #0001;
+}
+.inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+.proportion-inputs {
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+}
+label {
+    font-weight: bold;
+}
+.shape-card {
+    box-shadow: 0 1px 8px #0001;
+    border-radius: 20px;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: box-shadow .2s;
+    outline: none;
+}
+.shape-card.selected {
+    box-shadow: 0 2px 16px #0099ff33, 0 1px 8px #0001;
+    border: 2px solid #0099ff;
+}
+.shape-card:focus {
+    box-shadow: 0 2px 16px #0099ff33, 0 1px 8px #0001;
+    border: 2px solid #0099ff;
+}

@@ -6,48 +6,47 @@
     <title>Калькулятор эпоксидной смолы</title>
     <!-- Подключение Picnic CSS для лёгкой стилизации -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic">
-    <style>
-        body {
-            max-width: 420px;
-            margin: 40px auto;
-            background: #f8f8f8;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px #0001;
-            padding: 2em 1.5em;
-        }
-        h1 {
-            text-align: center;
-        }
-        .result {
-            font-size: 1.2em;
-            margin-top: 1.5em;
-            background: #fff;
-            border-radius: 8px;
-            padding: 1em;
-            box-shadow: 0 1px 4px #0001;
-        }
-        .inputs {
-            display: flex;
-            flex-direction: column;
-            gap: 1em;
-        }
-        .proportion-inputs {
-            display: flex;
-            gap: 0.5em;
-            align-items: center;
-        }
-        label {
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Калькулятор эпоксидной смолы</h1>
-    <form class="inputs" oninput="calculate()" autocomplete="off">
-        <label>
-            Итоговый объём (мл):
-            <input type="number" id="totalVolume" min="1" value="160" required>
-        </label>
+    <div id="shapeSelector" style="margin-bottom: 2em;">
+        <div style="font-size:1.3em;font-weight:600;margin-bottom:0.7em;">Форма</div>
+        <div style="display:flex;gap:1.2em;">
+            <div class="shape-card selected" data-shape="rect" tabindex="0" style="flex:1;cursor:pointer;background:#fff;border-radius:20px;padding:1em;box-shadow:0 1px 8px #0001;display:flex;flex-direction:column;align-items:center;transition:box-shadow .2s;outline:none;">
+                <img src="rect.jpg" alt="Прямоугольная форма" style="width:80px;height:60px;object-fit:contain;">
+                <div style="margin-top:0.7em;font-weight:600;">Прямоугольная</div>
+            </div>
+            <div class="shape-card" data-shape="circle" tabindex="0" style="flex:1;cursor:pointer;background:#fff;border-radius:20px;padding:1em;box-shadow:0 1px 8px #0001;display:flex;flex-direction:column;align-items:center;transition:box-shadow .2s;outline:none;">
+                <img src="circle.jpg" alt="Круглая форма" style="width:80px;height:60px;object-fit:contain;">
+                <div style="margin-top:0.7em;font-weight:600;">Круглая</div>
+            </div>
+        </div>
+    </div>
+    <form class="inputs" id="formInputs" autocomplete="off">
+        <div id="rectFields">
+            <label>
+                Длина (см):
+                <input type="number" id="rectLength" min="0.1" step="0.1" value="10" required>
+            </label>
+            <label>
+                Ширина (см):
+                <input type="number" id="rectWidth" min="0.1" step="0.1" value="10" required>
+            </label>
+            <label>
+                Высота (см):
+                <input type="number" id="rectHeight" min="0.1" step="0.1" value="1" required>
+            </label>
+        </div>
+        <div id="circleFields" style="display:none;">
+            <label>
+                Диаметр (см):
+                <input type="number" id="circleDiameter" min="0.1" step="0.1" value="10" required>
+            </label>
+            <label>
+                Высота (см):
+                <input type="number" id="circleHeight" min="0.1" step="0.1" value="1" required>
+            </label>
+        </div>
         <label>
             Пропорция смешивания (A : B):
             <span class="proportion-inputs">
@@ -58,25 +57,10 @@
         </label>
     </form>
     <div class="result" id="result">
-        <div>Компонент A: <b id="amountA">0</b> мл</div>
-        <div>Компонент B: <b id="amountB">0</b> мл</div>
+        <div>Масса смеси: <b id="totalMass">0</b> г (<b id="totalMassKg">0</b> кг)</div>
+        <div>Компонент A: <b id="amountA">0</b> г</div>
+        <div>Компонент B: <b id="amountB">0</b> г</div>
     </div>
-    <script>
-        function calculate() {
-            const total = parseFloat(document.getElementById('totalVolume').value) || 0;
-            const partA = parseFloat(document.getElementById('partA').value) || 0;
-            const partB = parseFloat(document.getElementById('partB').value) || 0;
-            const sum = partA + partB;
-            let amountA = 0, amountB = 0;
-            if (sum > 0 && total > 0) {
-                amountA = total * partA / sum;
-                amountB = total * partB / sum;
-            }
-            document.getElementById('amountA').textContent = amountA.toFixed(2);
-            document.getElementById('amountB').textContent = amountB.toFixed(2);
-        }
-        // Первичный расчёт при загрузке
-        calculate();
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
